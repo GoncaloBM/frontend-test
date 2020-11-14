@@ -2,8 +2,15 @@ import React from "react";
 import { Book } from "../../book/Book";
 import { useQuery } from "@apollo/client";
 import { BOOKS_GRAPH } from "../../../queries";
+import { Cart } from "../../cart/Cart";
 
-export const ListView = ({ setView, setBookToEdit }) => {
+export const ListView = ({
+  setView,
+  setBookToEdit,
+  addToCart,
+  removeFromCart,
+  cart
+}) => {
   const { loading, error, data } = useQuery(BOOKS_GRAPH, {
     fetchPolicy: "cache-and-network",
   });
@@ -22,6 +29,7 @@ export const ListView = ({ setView, setBookToEdit }) => {
 
   return (
     <div className="list-view">
+      <Cart cart={cart}/>
       <button
         onClick={() => {
           setView("Create");
@@ -39,6 +47,8 @@ export const ListView = ({ setView, setBookToEdit }) => {
               author={book.author}
               price={book.price}
               setBookToEdit={setBookToEdit}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
             />
           );
         })}

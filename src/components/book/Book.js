@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-export const Book = ({ id, title, author, price, setBookToEdit }) => {
+export const Book = ({
+  id,
+  title,
+  author,
+  price,
+  setBookToEdit,
+  addToCart,
+  removeFromCart,
+}) => {
   const classes = {
     book: {
       display: "flex",
@@ -45,6 +53,17 @@ export const Book = ({ id, title, author, price, setBookToEdit }) => {
       fontSize: "3vw",
     },
   };
+
+  const [selectToCart, setSelectToCart] = useState(false);
+
+  useEffect(() => {
+    if (selectToCart) {
+      addToCart({ id: id, title: title, price: price });
+    } else {
+      removeFromCart({ id: id, title: title, price: price });
+    }
+  }, [selectToCart]);
+
   return (
     <div className="book" style={classes.book}>
       <div style={classes.id}>{id}</div>
@@ -73,7 +92,12 @@ export const Book = ({ id, title, author, price, setBookToEdit }) => {
         >
           Edit
         </div>
-        <div style={classes.button}>Cart</div>
+        <div
+          style={classes.button}
+          onClick={() => setSelectToCart(!selectToCart)}
+        >
+          Cart
+        </div>
       </div>
     </div>
   );
