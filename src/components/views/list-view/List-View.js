@@ -1,20 +1,12 @@
 import React from "react";
 import { Book } from "../../book/Book";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import { BOOKS_GRAPH } from "../../../queries";
 
-const BOOKS_GRAPH = gql`
-  {
-    books {
-      title
-      bookId
-      author
-      price
-    }
-  }
-`;
-
-export const ListView = () => {
-  const { loading, error, data } = useQuery(BOOKS_GRAPH);
+export const ListView = ({ setView, setBookToEdit }) => {
+  const { loading, error, data } = useQuery(BOOKS_GRAPH, {
+    fetchPolicy: "cache-and-network",
+  });
 
   const classes = {
     listBooks: {
@@ -30,6 +22,13 @@ export const ListView = () => {
 
   return (
     <div className="list-view">
+      <button
+        onClick={() => {
+          setView("Create");
+        }}
+      >
+        Create New
+      </button>
       <div className="list-books" style={classes.listBooks}>
         {data.books.map((book, index) => {
           return (
@@ -39,11 +38,11 @@ export const ListView = () => {
               title={book.title}
               author={book.author}
               price={book.price}
+              setBookToEdit={setBookToEdit}
             />
           );
         })}
       </div>
-      <button>Create New</button>
     </div>
   );
 };

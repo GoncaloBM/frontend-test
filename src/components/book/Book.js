@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Book = ({ id, title, author, price }) => {
+export const Book = ({ id, title, author, price, setBookToEdit }) => {
   const classes = {
     book: {
       display: "flex",
@@ -60,7 +60,19 @@ export const Book = ({ id, title, author, price }) => {
         </div>
       </div>
       <div style={classes.buttons}>
-        <div style={classes.button}>Edit</div>
+        <div
+          style={classes.button}
+          onClick={() =>
+            setBookToEdit({
+              id: id,
+              title: title,
+              author: author,
+              price: price,
+            })
+          }
+        >
+          Edit
+        </div>
         <div style={classes.button}>Cart</div>
       </div>
     </div>

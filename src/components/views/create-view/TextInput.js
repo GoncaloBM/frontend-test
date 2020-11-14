@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const TextInput = ({ label, setState }) => {
+export const TextInput = ({ label, setState, initialValue }) => {
   const classes = useStyles();
   return (
     <form className={classes.root} noValidate autoComplete="off">
@@ -19,8 +19,12 @@ export const TextInput = ({ label, setState }) => {
         id="standard-basic"
         label={label}
         onChange={(event) => {
-          setState(event.target.value);
+          label === "Price"
+            ? setState(parseInt(event.target.value))
+            : setState(event.target.value);
         }}
+        type={label === "Price" ? "number" : "string"}
+        value={initialValue}
       />
     </form>
   );
