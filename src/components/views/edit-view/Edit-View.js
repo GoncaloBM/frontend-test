@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import Button from "@material-ui/core/Button";
 import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import { TextInput } from "../create-view/TextInput";
-import { EDIT_BOOK } from "../../../queries";
+import { EDIT_BOOK, BOOKS_GRAPH } from "../../../queries";
 
 export const EditView = ({
   id,
@@ -25,10 +26,12 @@ export const EditView = ({
     setBookToEdit({});
   };
 
-  const handleEditBook = (e) => {
+  const handleEditBook = async (e) => {
     e.preventDefault();
-    editBook({
+    await editBook({
       variables: { id, titleToEdit, authorToEdit, priceToEdit },
+      awaitRefetchQueries: true,
+      refetchQueries: [{ query: BOOKS_GRAPH }],
     });
   };
 
@@ -55,8 +58,12 @@ export const EditView = ({
         initialValue={priceToEdit}
         setState={setPrice}
       />
-      <button onClick={handleEditBook}>Edit</button>
-      <button onClick={returnHome}>Cancel</button>
+      <Button variant="contained" color="primary" onClick={handleEditBook}>
+        Edit
+      </Button>
+      <Button variant="contained" color="secondary" onClick={returnHome}>
+        Cancel
+      </Button>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
 import Checkbox from "@material-ui/core/Checkbox";
 import { addToCart, removeFromCart } from "../functions/cartFunctions";
@@ -94,19 +95,16 @@ export const Book = ({
         </div>
       </div>
       <div style={classes.buttons}>
-        <div
-          style={classes.button}
-          onClick={() =>
+      <Button  color="primary" onClick={() =>
             setBookToEdit({
               id: id,
               title: title,
               author: author,
               price: price,
             })
-          }
-        >
-          Edit
-        </div>
+          }>
+        Edit
+      </Button>
 
         <Checkbox
           checked={checked}

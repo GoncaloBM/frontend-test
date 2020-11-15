@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { TextInput } from "./TextInput";
@@ -8,7 +9,9 @@ export const CreateView = ({ setView }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [price, setPrice] = useState("");
-  const [createBook, { loading, error }] = useMutation(CREATE_BOOK);
+  const [createBook, { loading, error }] = useMutation(CREATE_BOOK, {
+    onCompleted: () => goHome(),
+  });
   const history = useHistory();
   const goHome = () => history.push("/");
 
@@ -21,8 +24,10 @@ export const CreateView = ({ setView }) => {
         try {
           let data = cache.readQuery({ query: BOOKS_GRAPH });
           data = Object.assign({}, data);
-          data.books = [...data.books, createBook];
-          cache.writeQuery({ query: BOOKS_GRAPH }, data);
+          cache.writeQuery({
+            query: BOOKS_GRAPH,
+            data: { books: [...data.books, createBook] },
+          });
         } catch (error) {
           console.error(error);
         }
@@ -35,8 +40,12 @@ export const CreateView = ({ setView }) => {
       <TextInput label={"Title"} setState={setTitle} />
       <TextInput label={"Author"} setState={setAuthor} />
       <TextInput label={"Price"} setState={setPrice} />
-      <button onClick={handleCreateBook}>Create</button>
-      <button onClick={goHome}>Cancel</button>
+      <Button variant="contained" color='primary'onClick={handleCreateBook}>
+        Create
+      </Button>
+      <Button variant="contained" color='secondary'onClick={goHome}>
+        Cancel
+      </Button>
     </div>
   );
 };
