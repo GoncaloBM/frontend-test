@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import Checkbox from "@material-ui/core/Checkbox";
+import { addToCart, removeFromCart } from "../functions/cartFunctions";
 
 export const Book = ({
   id,
@@ -6,8 +9,9 @@ export const Book = ({
   author,
   price,
   setBookToEdit,
-  addToCart,
-  removeFromCart,
+  setCart,
+  cart,
+  bookToEdit,
 }) => {
   const classes = {
     book: {
@@ -54,15 +58,26 @@ export const Book = ({
     },
   };
 
-  const [selectToCart, setSelectToCart] = useState(false);
+  const [checked, setChecked] = useState(false);
+
+  const history = useHistory();
+  const goToEdit = () => history.push("/edit");
+
+  const handleCheck = (e) => {
+    setChecked(e.target.checked);
+  };
 
   useEffect(() => {
-    if (selectToCart) {
-      addToCart({ id: id, title: title, price: price });
+    if (checked) {
+      setCart(addToCart(cart, { id: id, title: title, price: price }));
     } else {
-      removeFromCart({ id: id, title: title, price: price });
+      setCart(removeFromCart(cart, { id: id, title: title, price: price }));
     }
-  }, [selectToCart]);
+
+    if (bookToEdit.id !== undefined) {
+      goToEdit();
+    }
+  }, [checked, bookToEdit]);
 
   return (
     <div className="book" style={classes.book}>
@@ -92,12 +107,12 @@ export const Book = ({
         >
           Edit
         </div>
-        <div
-          style={classes.button}
-          onClick={() => setSelectToCart(!selectToCart)}
-        >
-          Cart
-        </div>
+
+        <Checkbox
+          checked={checked}
+          onChange={handleCheck}
+          inputProps={{ "aria-label": "primary checkbox" }}
+        />
       </div>
     </div>
   );

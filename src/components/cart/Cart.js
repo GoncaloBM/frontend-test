@@ -1,4 +1,7 @@
 import { React, useState, useEffect } from "react";
+import "./Cart.css";
+import { Item } from "./Item";
+import { CartInfo } from "./CartInfo";
 
 export const Cart = ({ cart }) => {
   const [totalPrice, setTotalPrice] = useState(0);
@@ -23,15 +26,11 @@ export const Cart = ({ cart }) => {
       <div className="cart">
         {cart &&
           cart.map((item, index) => {
-            return (
-              <div className="item">
-                <div className="item-name">{item.title}</div>
-                <div className="item-price">{item.price}</div>
-              </div>
-            );
+            return <Item key={index} title={item.title} price={item.price} />;
           })}
       </div>
-      <div className="total">Total: {totalPrice}</div>
+      <CartInfo text={"Books Selected"} info={selectItems} />
+      <CartInfo text={"Total Price"} info={totalPrice} />
     </div>
   );
 };

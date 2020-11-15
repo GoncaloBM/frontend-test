@@ -1,0 +1,15 @@
+.cart-view {
+  position: fixed;
+  width: 20%;
+  height: 100vh;
+  right: 0;
+}
+
+.item {
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  margin: 2px;
+}

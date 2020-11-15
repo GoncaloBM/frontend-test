@@ -1,0 +1,10 @@
+.list-view {
+  position: relative;
+  width: 100%;
+}
+
+.list {
+  position: absolute;
+  width: 80%;
+  left: 0;
+}
