@@ -53,6 +53,7 @@ For End-to-End Test:
 npm run cypress
 ```
 
+Integration Tests
 ```
-Integratio test
+endToEndSories.spec.js
 ```
