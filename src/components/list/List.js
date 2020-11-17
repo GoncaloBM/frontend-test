@@ -23,7 +23,7 @@ export const List = ({ setBookToEdit, setCart, cart, bookToEdit }) => {
     <div className="list">
       <Title title="Book Store" size="5vw" />
       <Button variant="contained" color="primary" onClick={goToCreate}>
-        Create
+        Create New
       </Button>
       <div className="list-books">
         {data.books.map((book, index) => {
