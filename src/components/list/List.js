@@ -3,32 +3,27 @@ import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { Book } from "../book/Book";
-import { BOOKS_GRAPH } from "../../queries";
+import { BOOKS_GRAPH } from "../utils/queries";
+import { Title } from "../common/Title";
 
 export const List = ({ setBookToEdit, setCart, cart, bookToEdit }) => {
-  const { loading, error, data } = useQuery(BOOKS_GRAPH, {
-    // fetchPolicy: "cache-and-network",
-  });
+  // This useQuery will fetch from the query BOOKS_GRAPH
+  // While is fetching, it will render loading
+  // If something wrong, it will render error
+  // If successfull it will render all the books from the graphQL query
+  const { loading, error, data } = useQuery(BOOKS_GRAPH);
   const history = useHistory();
   const goToCreate = () => history.push("/create");
-
-  const classes = {
-    listBooks: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
   return (
     <div className="list">
+      <Title title="Book Store" size="5vw" />
       <Button variant="contained" color="primary" onClick={goToCreate}>
         Create
       </Button>
-      <div className="list-books" style={classes.listBooks}>
+      <div className="list-books">
         {data.books.map((book, index) => {
           return (
             <Book

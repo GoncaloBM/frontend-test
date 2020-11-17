@@ -4,18 +4,17 @@ import { Cart } from "../../cart/Cart";
 import { List } from "../../list/List";
 
 export const ListView = ({
-  setView,
   setBookToEdit,
   cart,
   setCart,
   bookToEdit,
 }) => {
+  // In this view, we will have 2 different screens : List and the Cart
   return (
     <div className="list-view">
       <Cart cart={cart} />
       <List
         setBookToEdit={setBookToEdit}
-        setView={setView}
         setCart={setCart}
         cart={cart}
         bookToEdit={bookToEdit}

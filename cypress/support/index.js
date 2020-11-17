@@ -14,7 +14,9 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+// Testing Library queries for Cypress
+import '@testing-library/cypress/add-commands';
+require("cypress-react-unit-test/support");
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

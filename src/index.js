@@ -3,12 +3,13 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloProvider } from "@apollo/client";
 
+// Client should be the url from the graphQL server and it should have an Apollo Provider for all the App
 const client = new ApolloClient({
-  uri: 'http://localhost:4567/graphql',
-  cache: new InMemoryCache()
+  uri: "http://localhost:4567/graphql",
+  cache: new InMemoryCache(),
 });
 
 ReactDOM.render(

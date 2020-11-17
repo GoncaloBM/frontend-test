@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import "./Cart.css";
 import { Item } from "./Item";
 import { CartInfo } from "./CartInfo";
+import { Title } from "../common/Title";
 
 export const Cart = ({ cart }) => {
   const [totalPrice, setTotalPrice] = useState(0);
@@ -23,6 +24,7 @@ export const Cart = ({ cart }) => {
 
   return (
     <div className="cart-view">
+      <Title title="Cart" size="3vw" />
       <div className="cart">
         {cart &&
           cart.map((item, index) => {

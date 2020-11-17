@@ -10,6 +10,7 @@ function App() {
   const [bookToEdit, setBookToEdit] = useState({});
   const [cart, setCart] = useState([]);
 
+  // Used React-Router to create the different views of the App - List View - Create View - Edit View
   return (
     <Router>
       <AppLayout>

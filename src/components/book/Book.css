@@ -1,0 +1,50 @@
+.book {
+  display: flex;
+  align-items: center;
+  justify-content: "center";
+  width: 80%;
+  border: 1px solid black;
+  margin: 1rem;
+}
+
+.organize {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 70%;
+}
+.id {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10%;
+}
+.title {
+  font-size: 3vw;
+  text-align: center;
+}
+.author {
+  font-size: 2vw;
+}
+.price {
+  font-size: 2vw;
+}
+.buttons {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 20%;
+}
+.button {
+  display: "flex";
+  align-items: "center";
+  flex-direction: "column";
+  justify-content: "center";
+  height: 40%;
+  width: 100%;
+  font-size: 3vw;
+}
