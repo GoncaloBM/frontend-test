@@ -17,6 +17,8 @@ export const List = ({ setBookToEdit, setCart, cart, bookToEdit }) => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
+  // In the render, we will map all the books from the query and pass to the Book Componeent the respective Id, title, Author and price
+  // As well as the properties to the Edit View and to the Cart
   return (
     <div className="list">
       <Title title="Book Store" size="5vw" />

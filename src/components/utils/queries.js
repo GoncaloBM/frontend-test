@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 
+// This are the queries to get the books, create new books and edit existing books from the graphQL DB
 export const BOOKS_GRAPH = gql`
   {
     books {
